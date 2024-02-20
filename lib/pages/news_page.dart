@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_services_v2/models/articles.dart';
+import 'package:web_services_v2/pages/News_details.dart';
 import 'package:web_services_v2/services/news_services.dart';
 
 class Newspage extends StatefulWidget {
@@ -48,40 +49,75 @@ class _NewspageState extends State<Newspage> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Column(
                                   children: [
-                                    Image.network(
-                                      article.urlToImage,
-                                      height: 100,
-                                      width: 100,
+                                    InkWell(
+                                      onTap:(){
+                                        showDialog(context: context, builder: (context) {
+                                          return AlertDialog(
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                    onTap:(){
+                                                      Navigator.of(context).pop();
+                                            },
+                                                    child: Align(alignment: Alignment.topRight,
+                                                    child: Icon(Icons.close),
+                                                    ),
+                                                ),
+                                                Image.network(article.urlToImage),
+                                              ],
+                                            ),
+                                          );
+                                        },)  ;
+                                    },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Image.network(
+                                          article.urlToImage,
+                                        ),
+                                      ),
                                     ),
-                                    const SizedBox(
-                                      width: 16,
+                                    Text(
+                                      article.title,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.w900),
                                     ),
-                                    Expanded(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    Row(
                                       children: [
-                                        Text(
-                                          article.title,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.blue,
-                                              fontWeight: FontWeight.w900),
+                                        Expanded(
+                                          child: Text(
+                                            article.description,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontStyle: FontStyle.italic),
+                                          ),
                                         ),
-                                        Text(
-                                          article.description,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontStyle: FontStyle.italic),
-                                        ),
-                                        const SizedBox(
-                                          height: 16,
+                                        Expanded(child: Text(article.content)),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          onTap:(){
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                                              return NewsDetails();
+                                            },),);
+                                          },
+                                          child: Text('Read more',style: TextStyle(
+                                            color: Colors.blue
+                                          ),),
                                         ),
                                       ],
-                                    ))
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
                                   ],
                                 ),
                               ),
