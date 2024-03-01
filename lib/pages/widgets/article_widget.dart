@@ -91,7 +91,7 @@ class ArticleWidget extends StatelessWidget {
                         InkWell(
                           onTap:(){
                             Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                              return NewsDetails();
+                              return NewsDetails(article: article,);
                             },),);
                           },
                           child: Text('Read more',style: TextStyle(

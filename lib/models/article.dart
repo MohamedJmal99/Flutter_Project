@@ -2,7 +2,6 @@
 import 'package:web_services_v2/models/source.dart';
 
 class Article {
-  Source source;
   String author;
   String title;
   String description;
@@ -12,7 +11,6 @@ class Article {
   String content;
 
   Article({
-    required this.source,
     required this.author,
     required this.title,
     required this.description,
@@ -23,18 +21,16 @@ class Article {
   });
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
-    source: Source.fromJson(json["source"]),
-    author: json["author"],
-    title: json["title"],
-    description: json["description"],
-    url: json["url"],
-    urlToImage: json["urlToImage"],
-    publishedAt: DateTime.parse(json["publishedAt"]),
-    content: json["content"],
+    author: json["author"]?? "",
+    title: json["title"]?? "",
+    description: json["description"] ?? "",
+    url: json["url"]?? "",
+    urlToImage: json["urlToImage"] ?? "",
+    publishedAt: DateTime.tryParse(json["publishedAt"].toString()) ?? DateTime.now(),
+    content: json["content"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
-    "source": source.toJson(),
     "author": author,
     "title": title,
     "description": description,
