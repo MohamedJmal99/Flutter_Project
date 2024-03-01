@@ -63,6 +63,8 @@ class ArticleWidget extends StatelessWidget {
                           fontSize: 20,
                           color: Colors.blue,
                           fontWeight: FontWeight.w900),
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
                     ),
                     Row(
                       children: [
@@ -72,9 +74,15 @@ class ArticleWidget extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontStyle: FontStyle.italic),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Expanded(child: Text(article.content)),
+                        Expanded(child: Text(article.content,
+                        maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                        ),
                       ],
                     ),
                     Row(

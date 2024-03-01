@@ -36,7 +36,9 @@ class _NewspageState extends State<Newspage> {
       appBar: AppBar(
         title: Text("News Page"),
       ),
-      body: articles==null ? Center(child: CircularProgressIndicator()) : ListView.builder(itemBuilder: (context, index) {
+      body: articles==null ? Center(child: CircularProgressIndicator()) : ListView.builder(
+        itemCount: articles!.articles.length,
+        itemBuilder: (context, index) {
         Article article = articles!.articles[index];
         return ArticleWidget(article: article);
       },),
