@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:web_services_v2/models/article.dart';
 import 'package:web_services_v2/models/articles.dart';
 import 'package:web_services_v2/pages/News_details.dart';
+import 'package:web_services_v2/pages/widgets/article_widget.dart';
 import 'package:web_services_v2/services/news_services.dart';
 
 class Newspage extends StatefulWidget {
@@ -34,12 +36,10 @@ class _NewspageState extends State<Newspage> {
       appBar: AppBar(
         title: Text("News Page"),
       ),
-      body: ListView(
-        children: articles?.articles
-                .map((article) => )
-                .toList() ??
-            [],
-      ),
+      body: articles==null ? Center(child: CircularProgressIndicator()) : ListView.builder(itemBuilder: (context, index) {
+        Article article = articles!.articles[index];
+        return ArticleWidget(article: article);
+      },),
     );
   }
 }
